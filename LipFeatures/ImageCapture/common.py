@@ -1,6 +1,6 @@
 '''
 To make the program work, changes made in lines 80, 81
-Original: lineType = cv2.LINE.AA
+Original: lineType = cv2.LINE_AA
 '''
 
 #!/usr/bin/env python
