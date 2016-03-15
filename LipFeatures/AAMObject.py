@@ -1,9 +1,8 @@
 
 from pathlib import Path
 import menpo.io as mio
-from menpo.feature import  ndfeature
-from menpo.landmark import ibug_face_68_trimesh, labeller
-from menpodetect import load_dlib_frontal_face_detector
+from menpo.feature import ndfeature
+#from menpodetect import load_dlib_frontal_face_detector
 from menpofit.aam import HolisticAAM, LucasKanadeAAMFitter
 
 import os
@@ -20,7 +19,7 @@ class AAMInstance:
 		except :
 			pass
 
-		detector = load_dlib_frontal_face_detector()
+		#detector = load_dlib_frontal_face_detector()
 
 		def load_image(i):
 		    i = i.crop_to_landmarks_proportion(0.5)
@@ -52,19 +51,15 @@ class AAMInstance:
 
 
 	def getAAMObject(self):
-		if os.path.isfile(pathToTrainedAAM + AAMFile) == False :
-			self.trainAAMObject()
+		#if os.path.isfile(pathToTrainedAAM + AAMFile) == False :
+		#	self.trainAAMObject()
 
 		aam = pickle.load(open(AAMFile, "rb"))
 		return aam
 
 
 	def getAAMFitter(self, aam):
-		aam_fitter = LucasKanadeAAMFitter(
-		    aam,
-		    n_shape=[5, 15],
-		    n_appearance=[50, 150]
-		)
+		aam_fitter = LucasKanadeAAMFitter(aam, n_shape=[5, 15], n_appearance=[50, 150])
 
 		return aam_fitter
 

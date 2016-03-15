@@ -3,13 +3,13 @@ TODO:
     Code to return all the lip features
 '''
 import numpy as np
-from menpodetect import load_dlib_frontal_face_detector
+import menpodetect
+from menpodetect.opencv import *
 import menpo.image as mimg
 
-#File which contains all the paths
-from constants import *
 from ImageCapture import *
 import AAMObject
+from constants import *
 
 
 class lipFeatures:
@@ -20,17 +20,16 @@ class lipFeatures:
         return aam_fitter
 
     def getGrayscaleImage(self):
-        img = getImage()
-        gray = cv2.equalizeHist(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
-        image = mimg.Image(gray)
-        return image
+        img = getImage(0,pathToTestset+'/image_0003.png')
+        print type(img)
+        #gray = cv2.equalizeHist(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
+        #image = mimg.Image(gray)
+        return img
 
     def processImage(self, image, aam_fitter):
-        detector = load_dlib_frontal_face_detector()
+        detector = load_opencv_frontal_face_detector()
         detector(image)
-        result = aam_fitter.fit_from_bb(image,
-                                        image.landmarks['dlib_0'].lms,
-                                        max_iters=10)
+        result = aam_fitter.fit_from_bb(image,image.landmarks['PTS'].lms, max_iters=10)
         # print type(result)
         # img = result.final_shape
         # img = result.iter_image

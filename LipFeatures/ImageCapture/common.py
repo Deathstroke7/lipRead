@@ -11,7 +11,7 @@ This module contains some common routines used by other samples.
 
 import numpy as np
 import cv2
-import cv2.cv
+#import cv2.cv
 
 # built-in modules
 import os
